@@ -9,7 +9,7 @@ import logging.config
 from .cloudflare_exporter import run_exporter, run_parallel_exporter
 
 # logging
-with open("logging.yaml", "r") as f:
+with open("cloudflare_exporter/logging.yaml", "r") as f:
     log_cfg = yaml.safe_load(f.read())
     logging.config.dictConfig(log_cfg)
     LOGGER = logging.getLogger("stdout")

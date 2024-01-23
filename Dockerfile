@@ -1,9 +1,18 @@
-FROM python:3.7-slim-stretch
+FROM python:3.7
 
-COPY ./ /app
+RUN apt-get update && apt-get install -y git nano
+
 WORKDIR /app
 
-RUN pip install .
+COPY . .
+
+# install dependencies
+RUN pip install --upgrade pip
+RUN pip install --no-cache .
+
+# fix timezone
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime \
+  && echo $TZ > /etc/timezone
 
 EXPOSE 8080
 
