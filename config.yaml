@@ -1,0 +1,8 @@
+# Global values
+api: httpRequests1hGroups
+scrape_shift_seconds: 3600
+timerange_seconds: 86400
+zones:
+  xsasports.pro:
+    zone_id: 92c4bf3c6b3492e6b7f73a0761cf4b9e
+accounts: {}

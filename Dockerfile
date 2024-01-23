@@ -1,11 +1,10 @@
 FROM python:3.7-slim-stretch
-MAINTAINER Transferwise
 
 COPY ./ /app
 WORKDIR /app
 
 RUN pip install .
 
-EXPOSE 5000
+EXPOSE 8080
 
-ENTRYPOINT ["cfexpose", "parallel"]
+ENTRYPOINT ["cfexpose", "export", "config.yaml"]

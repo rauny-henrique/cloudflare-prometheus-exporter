@@ -45,5 +45,5 @@ def get():
     # LOGGER.debug("get mode")
 
 
-if __name__ == "__main__":
-    sys.exit(main())  # pragma: no cover
+# if __name__ == "__main__":
+#     sys.exit(main())  # pragma: no cover
