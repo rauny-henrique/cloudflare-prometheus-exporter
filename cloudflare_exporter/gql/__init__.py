@@ -9,65 +9,65 @@ __version__ = "0.1.12"
 
 class CloudflareGQLQuery:
     def __init__(self):
-        self.accounts = {
-            data_accounts = """query httpRequests1hGroups($accountTag: ACCOUNTTAG!, $datetime_gt: DATETIMEGT!, $datetime_lt: DATETIMELT!) {
-            viewer {
-                accounts (filter: {accountTag: $accountTag}) {
-                httpRequests1hGroups(limit: 5, filter: { datetime_gt: $datetime_gt, datetime_lt: $datetime_lt}) {
-                    dimensions {datetime}
-                    sum {
-                    requests,
-                    cachedBytes,
-                    cachedRequests,
-                    bytes,
-                    encryptedBytes,
-                    encryptedRequests,
+        data_accounts = """query httpRequests1hGroups($accountTag: ACCOUNTTAG!, $datetime_gt: DATETIMEGT!, $datetime_lt: DATETIMELT!) {
+        viewer {
+            accounts (filter: {accountTag: $accountTag}) {
+            httpRequests1hGroups(limit: 5, filter: { datetime_gt: $datetime_gt, datetime_lt: $datetime_lt}) {
+                dimensions {datetime}
+                sum {
+                requests,
+                cachedBytes,
+                cachedRequests,
+                bytes,
+                encryptedBytes,
+                encryptedRequests,
+                pageViews,
+                threats,
+                clientHTTPVersionMap{
+                    clientHTTPProtocol,
+                    requests
+                }
+                browserMap{
                     pageViews,
+                    uaBrowserFamily
+                }
+                clientHTTPVersionMap{
+                    clientHTTPProtocol,
+                    requests
+                }
+                contentTypeMap{
+                    bytes,
+                    requests,
+                    edgeResponseContentTypeName
+                }
+                countryMap{
+                    clientCountryName,
+                    requests,
                     threats,
-                    clientHTTPVersionMap{
-                        clientHTTPProtocol,
-                        requests
-                    }
-                    browserMap{
-                        pageViews,
-                        uaBrowserFamily
-                    }
-                    clientHTTPVersionMap{
-                        clientHTTPProtocol,
-                        requests
-                    }
-                    contentTypeMap{
-                        bytes,
-                        requests,
-                        edgeResponseContentTypeName
-                    }
-                    countryMap{
-                        clientCountryName,
-                        requests,
-                        threats,
-                        bytes
-                    }
-                    ipClassMap{
-                        ipType,
-                        requests
-                    }
-                    threatPathingMap{
-                        requests,
-                        threatPathingName
-                    }
-                    responseStatusMap{
-                        requests,
-                        edgeResponseStatus
-                    }
-                    }
-                    uniq{
-                        uniques
-                    }
+                    bytes
                 }
+                ipClassMap{
+                    ipType,
+                    requests
+                }
+                threatPathingMap{
+                    requests,
+                    threatPathingName
+                }
+                responseStatusMap{
+                    requests,
+                    edgeResponseStatus
+                }
+                }
+                uniq{
+                    uniques
                 }
             }
             }
-            """
+        }
+        }
+        """
+        self.accounts = {
             "httpRequests1hGroups": "".join(line.rstrip().lstrip() for line in data_accounts),
         }
         data_zones_one = """query httpRequests1hGroups($zoneTag: ZONETAG!, $datetime_gt: DATETIMEGT!, $datetime_lt: DATETIMELT!) {
