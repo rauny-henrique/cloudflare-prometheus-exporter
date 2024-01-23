@@ -42,7 +42,7 @@ def parallel(config):
 
 @main.command()
 def get():
-    LOGGER.debug("get mode")
+    # LOGGER.debug("get mode")
 
 
 if __name__ == "__main__":
