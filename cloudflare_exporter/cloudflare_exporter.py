@@ -25,9 +25,9 @@ CF_HEADERS = {
     # "X-AUTH-KEY": os.getenv("CLOUDFLARE_TOKEN"),
     # "X-AUTH-EMAIL": os.getenv("CLOUDFLARE_EMAIL"),
     "content-type": "application/json",
-    "Authorization": "Bearer " + os.getenv("CLOUDFLARE_TOKEN"),
+    "Authorization": "Bearer " + os.getenv("CLOUDFLARE_TOKEN", default="RlJR1ZK2DRToXY7PLLJ2QjI5Krks2Gsv4LpLhUIe"),
 }
-CF_ACCOUNT_TAG = os.getenv("CLOUDFLARE_ACCOUNT_TAG")
+CF_ACCOUNT_TAG = os.getenv("CLOUDFLARE_ACCOUNT_TAG", default="3fe09c6edb0f4a7eca8310277da1c713")
 EXPORTER_PORT = os.getenv("EXPORTER_PORT", 5000)
 
 
