@@ -25,8 +25,6 @@ class CloudflareGQLQuery:
 
 
 def read_gql_query(query_file):
-    query_path = "cloudflare_exporter/gql/"
-    query_file = query_path + query_file
     with open(query_file) as data:
         query = "".join(line.rstrip().lstrip() for line in data)
     return query
