@@ -10,7 +10,7 @@ PROMTOOL          ?= promtool
 
 CLOUDFLARE_MIXIN        ?= mixin
 JSONNET_VENDOR_DIR      ?= mixin/vendor
-
+OUT_DIR					?= dashboards_out
 
 define require_clean_work_tree
 	@git update-index -q --ignore-submodules --refresh
