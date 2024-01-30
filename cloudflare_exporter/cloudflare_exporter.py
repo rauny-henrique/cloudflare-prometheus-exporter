@@ -242,7 +242,7 @@ def run_exporter(config):
     query_key = config.get("api", "httpRequests1hGroups")
     query = gql.query.zones.get(query_key)
 
-    timerange = config.get("timerangeSeconds", int(86400))
+    timerange = config.get("timerange_seconds", int(86400))
 
     # Initialise internal metrics
     for zone in monitored_zones.keys():
