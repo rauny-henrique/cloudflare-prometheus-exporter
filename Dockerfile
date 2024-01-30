@@ -1,8 +1,6 @@
 FROM python:3.7
 
-RUN apt-get update && apt-get install -y git nano
-
-# RUN git clone https://github.com/rauny-henrique/cloudflare-prometheus-exporter.git /app
+RUN apt-get update && apt-get install -y git nano jq curl
 
 COPY ./config.yaml /config.yaml
 COPY ./logging.yaml /logging.yaml
