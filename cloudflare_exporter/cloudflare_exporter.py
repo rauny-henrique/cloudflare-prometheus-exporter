@@ -44,6 +44,7 @@ class CloudflareExporter:
 
     def set_metric_values(self, metrics, zone, timerange):
 
+        MONITOR._uniques.labels(zone, timerange).set(metrics["uniq"]["uniques"])
         MONITOR._requests.labels(zone, timerange).set(metrics["requests"])
         MONITOR._cachedBytes.labels(zone, timerange).set(metrics["cachedBytes"])
         MONITOR._cachedRequests.labels(zone, timerange).set(metrics["cachedRequests"])
@@ -91,6 +92,9 @@ def parser_httpRequests1hGroups(
             "encryptedRequests": 0,
             "pageViews": 0,
             "threats": 0,
+            "uniq": {
+                "uniques": 0
+            }
         }
         if len(data) > 1:
             # ZONE!
@@ -106,7 +110,14 @@ def parser_httpRequests1hGroups(
                 #  feels like too much work for now.
                 metrics = element["sum"]
                 for key, value in metrics.items():
-                    profile[key] += value
+                    if (key == "uniq")
+                    {
+                        profile[key]["uniques"] += value["uniques"]
+                    }
+                    else
+                    {
+                        profile[key] += value
+                    }
             profile = parse_maps(profile)
             return profile
         else:

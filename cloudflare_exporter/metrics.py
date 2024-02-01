@@ -36,6 +36,8 @@ class CloudflareHttpMetrics:
         "cloudflare_threats_detailed", "", ["zone", "country", "timerange_seconds"]
     )
 
+    _uniques = Gauge("cloudflare_uniques", "", ["zone", "timerange_seconds"])
+
     CLOUDFLARE_1H_BUCKETS = [
         # datetime.time 24x hour buckets
         #  can I have datetime buckets?
