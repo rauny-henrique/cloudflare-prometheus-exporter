@@ -44,7 +44,7 @@ class CloudflareExporter:
 
     def set_metric_values(self, metrics, zone, timerange):
 
-        MONITOR._uniques.labels(zone, timerange).set(metrics["uniq"]["uniques"])
+        MONITOR._uniques.labels(zone, timerange).set(metrics["uniques"])
         MONITOR._requests.labels(zone, timerange).set(metrics["requests"])
         MONITOR._cachedBytes.labels(zone, timerange).set(metrics["cachedBytes"])
         MONITOR._cachedRequests.labels(zone, timerange).set(metrics["cachedRequests"])
@@ -92,9 +92,7 @@ def parser_httpRequests1hGroups(
             "encryptedRequests": 0,
             "pageViews": 0,
             "threats": 0,
-            "uniq": {
-                "uniques": 0
-            }
+            "uniques": 0
         }
         if len(data) > 1:
             # ZONE!
@@ -108,17 +106,19 @@ def parser_httpRequests1hGroups(
             for element in response_histogram:
                 # asigning metrics to correct histogram buckets
                 #  feels like too much work for now.
+
+                #sum
                 metrics = element["sum"]
                 for key, value in metrics.items():
-                    if (key == "uniq")
-                    {
-                        profile[key]["uniques"] += value["uniques"]
-                    }
-                    else
-                    {
-                        profile[key] += value
-                    }
+                    profile[key] += value
+
+                # uniq
+                metrics = element["uniq"]
+                for key, value in metrics.items():
+                    profile[key] += value
+
             profile = parse_maps(profile)
+            # LOGGER.debug(profile)
             return profile
         else:
             return []  # Not to modify httpRequests1hGroups type
@@ -278,7 +278,7 @@ def run_exporter(config):
             raw_data = exporter.get_metrics(
                 query, variables
             ).json()  # What if, when it's not json.
-            LOGGER.debug(raw_data)
+            # LOGGER.debug(raw_data)
             metrics = parser_httpRequests1hGroups(
                 raw_data,
                 endpoint="zones",
